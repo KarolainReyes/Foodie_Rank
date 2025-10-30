@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foodie Rank | Restaurantes</title>
+  <link rel="stylesheet" href="./css/root.css">
+  <link rel="stylesheet" href="./css/restaurante_style.css">
+</head>
+<body>
+
+  <section class="hero">
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <a href="index.html">HOME</a>
+      <a href="#" style="color: var(--accent);">TOP RESTAURANTES</a>
+      <a href="#">CATEGORÍAS</a>
+      <a href="#">PLATOS</a>
+      <button class="login-btn">Log In</button>
+    </nav>
+
+    <!-- FILTROS -->
+    <div class="filter-bar">
+      <input type="text" id="searchInput" placeholder="Buscar restaurante..." />
+      <select id="categoryFilter">
+        <option value="all">Todas las categorías</option>
+        <option value="Fast Food">Fast Food</option>
+        <option value="Gourmet">Gourmet</option>
+        <option value="Vegetariana">Vegetariana</option>
+        <option value="Asiática">Asiática</option>
+      </select>
+      <select id="rankingFilter">
+        <option value="all">Todos los rankings</option>
+        <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
+        <option value="4">⭐️⭐️⭐️⭐️</option>
+        <option value="3">⭐️⭐️⭐️</option>
+      </select>
+    </div>
+
+    <!-- LISTA DE RESTAURANTES -->
+    <h2 class="section-title">Restaurantes destacados</h2>
+    <div class="restaurants-container" id="restaurantsContainer">
+      <!-- Tarjetas generadas dinámicamente -->
+    </div>
+  </section>
+
+  <script src="./js/restaurantes.js"></script>
+</body>
+</html>
