@@ -1,0 +1,128 @@
+/* === GENERAL === */
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  background: url('../images/fondo.png') repeat;
+  background-size: contain;
+  background-color: var(--color-bg);
+}
+
+/* === HERO === */
+.hero {
+  background-color: var(--color-bg-mid);
+  max-width: 90%;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 15px var(--shadow);
+}
+
+/* === NAVBAR === */
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2rem;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: var(--text-dark);
+  transition: 0.3s;
+}
+
+.navbar a:hover {
+  color: var(--accent);
+}
+
+.navbar .login-btn {
+  background: var(--accent);
+  color: var(--text-light);
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.navbar .login-btn:hover {
+  opacity: 0.85;
+}
+
+/* === FILTER BAR === */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.filter-bar input,
+.filter-bar select {
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+}
+
+.filter-bar input {
+  flex: 1;
+}
+
+/* === SECTION TITLE === */
+.section-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #000;
+  display: inline-block;
+}
+
+/* === RESTAURANT GRID === */
+.restaurants-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: #e7dec9;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 4px 10px var(--shadow);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 1rem;
+}
+
+.card-content h3 {
+  margin: 0;
+  color: var(--text-dark);
+}
+
+.card-content p {
+  font-size: 0.9rem;
+  color: #444;
+  margin: 0.5rem 0 0.8rem;
+}
+
+.stars {
+  color: gold;
+  font-size: 1rem;
+}
