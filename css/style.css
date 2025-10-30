@@ -1,0 +1,216 @@
+/* === FONDO === */
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  background-color: var(--color-bg);
+}
+
+.background-pattern {
+
+  min-height: 100vh;
+  background-image: url("../images/fondo.png");
+  background-color: var(--color-bg);
+  background-size: contain;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-attachment: fixed;
+
+}
+
+
+/* === NAVBAR === */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px;
+  padding: 1rem 2rem;
+  background-color: var(--color-bg-mid);
+  margin-top: 2rem;
+  border-radius: var(--radius);
+}
+
+.navbar .logo {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--color-text);
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  color: var(--color-accent);
+}
+
+#login-btn {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+#login-btn:hover {
+  transform: scale(1.05);
+}
+
+/* === HERO === */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 1200px;
+  margin: 5rem 0;
+  background-color: var(--color-bg-mid);
+  padding: 3rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.hero-text {
+  max-width: 600px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin: 0;
+  color: var(--color-text);
+}
+
+.hero h2 {
+  font-size: 1.8rem;
+  margin-top: 1rem;
+  color: var(--color-accent);
+}
+
+.hero h2 span {
+  font-weight: bold;
+  color: var(--color-accent);
+}
+
+.hero p {
+  margin-top: 1.2rem;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.hero-img img {
+  width: 220px;
+  height: auto;
+}
+
+/* === MODAL === */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none; /* oculto por defecto */
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.login-modal {
+  background-color: var(--color-bg);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  width: 350px;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.login-modal h3 {
+  margin-bottom: 1.5rem;
+  color: var(--color-text);
+}
+
+.login-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-modal input {
+  padding: 0.6rem;
+  border: 1px solid #aaa;
+  border-radius: var(--radius);
+  font-family: var(--font-main);
+}
+
+.login-modal button {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  border: none;
+  padding: 0.7rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.login-modal button:hover {
+  transform: scale(1.05);
+}
+
+.login-modal p {
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  color: var(--color-text);
+}
+
+.login-modal a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.login-modal a:hover {
+  text-decoration: underline;
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-img {
+    margin-top: 2rem;
+  }
+
+  .navbar {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
