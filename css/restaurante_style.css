@@ -1,10 +1,71 @@
 /* === GENERAL === */
-body {
+.container {
   margin: 0;
   font-family: var(--font-main);
-  background: url('../images/fondo.png') repeat;
-  background-size: contain;
-  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      50% 50% at 100% 0,
+      #A24225 0% 5%,
+      #D3552E 6% 15%,
+      #A24225 16% 25%,
+      #D3552E 26% 35%,
+      #A24225 36% 45%,
+      #D3552E 46% 55%,
+      #A24225 56% 65%,
+      #D3552E 66% 75%,
+      #A24225 76% 85%,
+      #D3552E 86% 95%,
+      #0000 96%
+    ),
+    radial-gradient(
+      50% 50% at 0 100%,
+      #A24225 0% 5%,
+      #D3552E 6% 15%,
+      #A24225 16% 25%,
+      #D3552E 26% 35%,
+      #A24225 36% 45%,
+      #D3552E 46% 55%,
+      #A24225 56% 65%,
+      #D3552E 66% 75%,
+      #A24225 76% 85%,
+      #D3552E 86% 95%,
+      #0000 96%
+    ),
+    radial-gradient(
+      50% 50%,
+      #A24225 0% 5%,
+      #D3552E 6% 15%,
+      #A24225 16% 25%,
+      #D3552E 26% 35%,
+      #A24225 36% 45%,
+      #D3552E 46% 55%,
+      #A24225 56% 65%,
+      #D3552E 66% 75%,
+      #A24225 76% 85%,
+      #D3552E 86% 95%,
+      #0000 96%
+    ),
+    radial-gradient(
+        50% 50%,
+        #A24225 0% 5%,
+        #D3552E 6% 15%,
+        #A24225 16% 25%,
+        #D3552E 26% 35%,
+        #A24225 36% 45%,
+        #D3552E 46% 55%,
+        #A24225 56% 65%,
+        #D3552E 66% 75%,
+        #A24225 76% 85%,
+        #D3552E 86% 95%,
+        #0000 96%
+      )
+      38px 38px;
+  background-size: 76px 76px;
+  background-color: #A24225;
 }
 
 /* === HERO === */

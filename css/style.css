@@ -1,22 +1,71 @@
 /* === FONDO === */
-body {
+.container {
   margin: 0;
   font-family: var(--font-main);
-  background-color: var(--color-bg);
-}
-
-.background-pattern {
-
-  min-height: 100vh;
-  background-image: url("../images/fondo.png");
-  background-color: var(--color-bg);
-  background-size: contain;
-  background-position: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-attachment: fixed;
-
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      50% 50% at 100% 0,
+      #A24225 0% 5%,
+      #D3552E 6% 15%,
+      #A24225 16% 25%,
+      #D3552E 26% 35%,
+      #A24225 36% 45%,
+      #D3552E 46% 55%,
+      #A24225 56% 65%,
+      #D3552E 66% 75%,
+      #A24225 76% 85%,
+      #D3552E 86% 95%,
+      #0000 96%
+    ),
+    radial-gradient(
+      50% 50% at 0 100%,
+      #A24225 0% 5%,
+      #D3552E 6% 15%,
+      #A24225 16% 25%,
+      #D3552E 26% 35%,
+      #A24225 36% 45%,
+      #D3552E 46% 55%,
+      #A24225 56% 65%,
+      #D3552E 66% 75%,
+      #A24225 76% 85%,
+      #D3552E 86% 95%,
+      #0000 96%
+    ),
+    radial-gradient(
+      50% 50%,
+      #A24225 0% 5%,
+      #D3552E 6% 15%,
+      #A24225 16% 25%,
+      #D3552E 26% 35%,
+      #A24225 36% 45%,
+      #D3552E 46% 55%,
+      #A24225 56% 65%,
+      #D3552E 66% 75%,
+      #A24225 76% 85%,
+      #D3552E 86% 95%,
+      #0000 96%
+    ),
+    radial-gradient(
+        50% 50%,
+        #A24225 0% 5%,
+        #D3552E 6% 15%,
+        #A24225 16% 25%,
+        #D3552E 26% 35%,
+        #A24225 36% 45%,
+        #D3552E 46% 55%,
+        #A24225 56% 65%,
+        #D3552E 66% 75%,
+        #A24225 76% 85%,
+        #D3552E 86% 95%,
+        #0000 96%
+      )
+      38px 38px;
+  background-size: 76px 76px;
+  background-color: #A24225;
 }
 
 
@@ -76,11 +125,12 @@ body {
 /* === HERO === */
 .hero {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   width: 90%;
-  max-width: 1200px;
-  margin: 5rem 0;
+  max-width: 90%;
+  margin: 2rem auto;
   background-color: var(--color-bg-mid);
   padding: 3rem;
   border-radius: var(--radius);
