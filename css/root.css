@@ -1,0 +1,15 @@
+:root {
+  /*Colores base */
+  --color-bg-mid:            #EDDFC5;
+  --color-accent:            #EE3C20;
+  --color-white:             #fff;
+  --color-text:              #111;
+  --color-bg:                #D3552E;
+
+  /*Sombras y bordes */
+  --radius: 8px;
+  --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  /*Tipografia */
+  --font-main: "Poppins", sans-serif;
+}
