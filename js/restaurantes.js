@@ -33,6 +33,75 @@ const restaurants = [
     description: "Las hamburguesas más jugosas de la ciudad.",
     rating: 3,
     category: "Fast Food"
+  },
+  {
+    name: "Sabor Urbano",
+    img: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
+    description: "Cocina fusión moderna con ingredientes locales.",
+    rating: 4,
+    category: "Gourmet"
+  },
+  {
+    name: "La Tavola Italiana",
+    img: "https://la-tavola.com/wp-content/uploads/2021/01/IMG_1603-cropped.jpg",
+    description: "Auténtica comida italiana con ambiente familiar.",
+    rating: 5,
+    category: "Gourmet"
+  },
+  {
+    name: "Veggie Life",
+    img: "https://tse4.mm.bing.net/th/id/OIP.jDyMR-slevZAjStNAE-pxAHaE8?w=1000&h=668&rs=1&pid=ImgDetMain&o=7&rm=3",
+    description: "Especialidad en platos vegetarianos y smoothies.",
+    rating: 4,
+    category: "Vegetariana"
+  },
+  {
+    name: "Bamboo Asian",
+    img: "https://images.unsplash.com/photo-1553621042-f6e147245754",
+    description: "Sabores del oriente en un solo lugar.",
+    rating: 5,
+    category: "Asiática"
+  },
+  {
+    name: "Burger Spot",
+    img: "https://images.unsplash.com/photo-1550547660-d9450f859349",
+    description: "Las hamburguesas más jugosas de la ciudad.",
+    rating: 3,
+    category: "Fast Food"
+  },{
+    name: "Sabor Urbano",
+    img: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
+    description: "Cocina fusión moderna con ingredientes locales.",
+    rating: 4,
+    category: "Gourmet"
+  },
+  {
+    name: "La Tavola Italiana",
+    img: "https://la-tavola.com/wp-content/uploads/2021/01/IMG_1603-cropped.jpg",
+    description: "Auténtica comida italiana con ambiente familiar.",
+    rating: 5,
+    category: "Gourmet"
+  },
+  {
+    name: "Veggie Life",
+    img: "https://tse4.mm.bing.net/th/id/OIP.jDyMR-slevZAjStNAE-pxAHaE8?w=1000&h=668&rs=1&pid=ImgDetMain&o=7&rm=3",
+    description: "Especialidad en platos vegetarianos y smoothies.",
+    rating: 4,
+    category: "Vegetariana"
+  },
+  {
+    name: "Bamboo Asian",
+    img: "https://images.unsplash.com/photo-1553621042-f6e147245754",
+    description: "Sabores del oriente en un solo lugar.",
+    rating: 5,
+    category: "Asiática"
+  },
+  {
+    name: "Burger Spot",
+    img: "https://images.unsplash.com/photo-1550547660-d9450f859349",
+    description: "Las hamburguesas más jugosas de la ciudad.",
+    rating: 3,
+    category: "Fast Food"
   }
 ];
 
@@ -82,3 +151,21 @@ function applyFilters() {
 searchInput.addEventListener("input", applyFilters);
 categoryFilter.addEventListener("change", applyFilters);
 rankingFilter.addEventListener("change", applyFilters);
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const loginBtn = document.getElementById("login-btn");
+  const modalOverlay = document.getElementById("modal-overlay");
+
+  // Mostrar modal
+  loginBtn.addEventListener("click", () => {
+    modalOverlay.style.display = "flex";
+  });
+
+  // Cerrar modal al hacer clic fuera del cuadro
+  modalOverlay.addEventListener("click", (e) => {
+    if (e.target === modalOverlay) {
+      modalOverlay.style.display = "none";
+    }
+  });
+});

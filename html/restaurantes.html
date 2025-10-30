@@ -11,31 +11,32 @@
   <section class="hero">
     <!-- NAVBAR -->
     <nav class="navbar">
-      <a href="index.html">HOME</a>
-      <a href="#" style="color: var(--accent);">TOP RESTAURANTES</a>
-      <a href="#">CATEGORÍAS</a>
-      <a href="#">PLATOS</a>
-      <button class="login-btn">Log In</button>
+      <div class="filter-bar">
+        <input type="text" id="searchInput" placeholder="Buscar restaurante..." />
+        <select id="categoryFilter">
+          <option value="all">Todas las categorías</option>
+          <option value="Fast Food">Fast Food</option>
+          <option value="Gourmet">Gourmet</option>
+          <option value="Vegetariana">Vegetariana</option>
+          <option value="Asiática">Asiática</option>
+        </select>
+        <select id="rankingFilter">
+          <option value="all">Todos los rankings</option>
+          <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
+          <option value="4">⭐️⭐️⭐️⭐️</option>
+          <option value="3">⭐️⭐️⭐️</option>
+        </select>
+      </div>
+      <div class="navita">
+        <ul>
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="./html/restaurantes.html">Top Restaurantes</a></li>
+        <li><a href="#">Categorías</a></li>
+        <li><a href="#">Platos</a></li>
+      </ul>
+      <button id="login-btn">Log In</button>
+      </div>
     </nav>
-
-    <!-- FILTROS -->
-    <div class="filter-bar">
-      <input type="text" id="searchInput" placeholder="Buscar restaurante..." />
-      <select id="categoryFilter">
-        <option value="all">Todas las categorías</option>
-        <option value="Fast Food">Fast Food</option>
-        <option value="Gourmet">Gourmet</option>
-        <option value="Vegetariana">Vegetariana</option>
-        <option value="Asiática">Asiática</option>
-      </select>
-      <select id="rankingFilter">
-        <option value="all">Todos los rankings</option>
-        <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
-        <option value="4">⭐️⭐️⭐️⭐️</option>
-        <option value="3">⭐️⭐️⭐️</option>
-      </select>
-    </div>
-
     <!-- LISTA DE RESTAURANTES -->
     <h2 class="section-title">Restaurantes destacados</h2>
     <div class="restaurants-container" id="restaurantsContainer">
