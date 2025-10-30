@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foodie Rank</title>
+  <link rel="stylesheet" href="css/root.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="background-pattern">
+    <header class="navbar">
+      <div class="logo">Foodie Rank</div>
+      <nav>
+        <ul>
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="#">Top Restaurantes</a></li>
+          <li><a href="#">Categorías</a></li>
+          <li><a href="#">Platos</a></li>
+        </ul>
+      </nav>
+      <button id="login-btn">Log In</button>
+    </header>
+
+    <main class="hero">
+      <div class="hero-text">
+        <h1>Foodie Rank</h1>
+        <h2><span>LOS MEJORES RESTAURANTES</span> PARA TI</h2>
+        <p>
+          Aquí encontrarás un ranking con los mejores restaurantes y sus platos,
+          reseñas reales de usuarios y calificaciones.
+        </p>
+      </div>
+      <div class="hero-img">
+        <img src="https://i.pinimg.com/736x/69/94/82/6994827d14e875750ae529a15c0da2de.jpg" alt="Plato con tapa" />
+      </div>
+    </main>
+  </div>
+    <div class="modal-overlay" id="modal-overlay">
+    <div class="login-modal" id="login-modal">
+      <h3>¡Te damos la bienvenida de vuelta!</h3>
+      <form id="login-form">
+        <input type="email" placeholder="Correo electrónico" required />
+        <input type="password" placeholder="Contraseña" required />
+        <button type="submit">Iniciar sesión</button>
+        <p>¿No tienes una cuenta? <a href="#">Regístrate</a></p>
+      </form>
+    </div>
+  </div>
+  <script src="js/main.js"></script>
+</body>
+</html>
