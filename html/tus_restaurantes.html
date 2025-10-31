@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foodie Rank | Tus Restaurantes</title>
+    <link rel="stylesheet" href="../css/root.css" />
+    <link rel="stylesheet" href="../css/tus_restaurantes_style.css" />
+  </head>
+
+  <body>
+    <section class="perfil-container">
+      <!-- ===== ASIDE IZQUIERDO ===== -->
+      <aside class="sidebar">
+        <h2 class="sidebar-title">Mis restaurantes</h2>
+        <div class="restaurants-list" id="userRestaurants">
+          <!-- Restaurantes renderizados dinámicamente -->
+          <div class="restaurant-card active">
+            <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" alt="Pizza Place" />
+            <div class="card-info">
+              <h4>Pizza Lovers</h4>
+            </div>
+          </div>
+
+          <div class="restaurant-card">
+            <img src="https://images.unsplash.com/photo-1553621042-f6e147245754" alt="Food Mix" />
+            <div class="card-info">
+              <h4>Sabores del Mundo</h4>
+            </div>
+          </div>
+        </div>
+
+        <button id="addRestaurantBtn" class="add-btn">+ Agregar restaurante</button>
+      </aside>
+
+      <!-- ===== PANEL PRINCIPAL ===== -->
+      <main class="perfil-content">
+        <form id="restaurantForm" class="restaurant-form">
+          <div class="form-section">
+            <label for="foto">Foto principal:</label>
+            <img
+              id="previewImage"
+              src="https://la-tavola.com/wp-content/uploads/2021/01/IMG_1603-cropped.jpg"
+              alt="Foto del restaurante"
+              class="preview-img"
+            />
+            <input type="file" id="foto" accept="image/*" />
+          </div>
+
+          <div class="form-section">
+            <label for="nombre">Nombre:</label>
+            <input
+              type="text"
+              id="nombre"
+              placeholder="Ej. Pizza Lovers"
+              value="Pizza Lovers"
+              required
+            />
+          </div>
+
+          <div class="form-section">
+            <label for="descripcion">Descripción:</label>
+            <textarea
+              id="descripcion"
+              rows="3"
+              placeholder="Describe brevemente tu restaurante"
+              required
+            >Restaurante especializado en pizzas artesanales y pastas frescas.</textarea>
+          </div>
+
+          <button type="submit" id="saveBtn">Enviar solicitud</button>
+        </form>
+      </main>
+    </section>
+
+    <script src="../js/tus_restaurantes.js"></script>
+  </body>
+</html>
