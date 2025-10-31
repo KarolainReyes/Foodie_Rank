@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foodie Rank | Perfil</title>
+    <link rel="stylesheet" href="../css/root.css" />
+    <link rel="stylesheet" href="../css/perfil_style.css" />
+  </head>
+  <body>
+    <section class="perfil-container">
+      <!-- PANEL LATERAL -->
+      <aside class="sidebar">
+        <h2 class="sidebar-title">Mi perfil</h2>
+        <nav class="sidebar-menu">
+          <button class="menu-btn active">
+            <img src="../images/icon-utensils.png" alt="icon" />
+            Tus restaurantes
+          </button>
+          <button class="menu-btn">
+            <img src="../images/icon-reviews.png" alt="icon" />
+            Tus reseñas
+          </button>
+          <button class="menu-btn">
+            <img src="../images/icon-publicacion.png" alt="icon" />
+            Tus solicitudes de publicación
+          </button>
+        </nav>
+      </aside>
+
+      <!-- CONTENIDO PRINCIPAL -->
+      <main class="perfil-content">
+        <div class="perfil-header">
+          <div class="perfil-user-info">
+            <h3 id="userName">Andresitogai1234</h3>
+            <p>Total de reseñas <span id="reviewCount">0</span></p>
+          </div>
+          <div class="perfil-avatar">
+            <img src="../images/user.png" alt="avatar" />
+          </div>
+        </div>
+
+        <form id="perfilForm" class="perfil-form">
+          <label for="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            value="Andresitogai1234"
+            readonly
+          />
+
+          <label for="correo">Correo:</label>
+          <input
+            type="email"
+            id="correo"
+            value="Andresitogai1234@gmail.com"
+            readonly
+          />
+
+          <button type="button" id="saveBtn">Guardar</button>
+        </form>
+      </main>
+    </section>
+
+    <script src="../js/perfil.js"></script>
+  </body>
+</html>
