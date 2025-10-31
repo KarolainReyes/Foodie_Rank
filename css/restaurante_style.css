@@ -180,7 +180,7 @@
 }
 
 /* === RESTAURANT === */
-.restaurants-container {
+.restaurants-container, .plates-container {
   display: flex;
   flex-direction: row;
   gap: 1.5rem;
@@ -191,7 +191,7 @@
   width: 100%;
 }
 
-.card {
+.card, .plate-card {
   background: #ceb06a8e;
   border-radius: var(--radius);
   overflow: hidden;
@@ -202,26 +202,26 @@
 
 } 
 
-.card:hover {
+.card:hover,.plate-card {
   transform: translateY(-5px);
 }
 
-.card img {
+.card img , .plate-card img{
   width: 100%;
   height: 200px;
   object-fit: cover;
 }
 
-.card-content {
+.card-content, .plate-content {
   padding: 1rem;
 }
 
-.card-content h3 {
+.card-content h3 , .plate-content h3{
   margin: 0;
   color: var(--text-dark);
 }
 
-.card-content p {
+.card-content p, .plate-content p {
   font-size: 0.9rem;
   color: #444;
   margin: 0.5rem 0 0.8rem;
