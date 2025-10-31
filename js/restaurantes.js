@@ -65,9 +65,6 @@ async function obtenerReseñas() {
   }
 }
 
-// ==========================
-// RENDER DE RESTAURANTES
-// ==========================
 function renderRestaurants(list) {
   container.innerHTML = "";
   list.forEach(r => {
@@ -88,7 +85,7 @@ function renderRestaurants(list) {
     container.appendChild(card);
   });
 
-  // Listeners para "Ver más"
+
   document.querySelectorAll(".btn-vermas").forEach(btn => {
     btn.addEventListener("click", (e) => {
       const id = e.currentTarget.dataset.id;
@@ -98,9 +95,34 @@ function renderRestaurants(list) {
   });
 }
 
-// ==========================
-// FILTROS
-// ==========================
+async function llenarCategorias() {
+  try {
+    const respuesta = await fetch("http://localhost:4000/categorias"); 
+    if (!respuesta.ok) throw new Error("Error al obtener categorías");
+
+    const categorias = await respuesta.json(); 
+
+    const categoryFilter = document.getElementById("categoryFilter");
+
+    categoryFilter.innerHTML = `<option value="all">Todas las categorías</option>`;
+
+    categorias.forEach(cat => {
+      const option = document.createElement("option");
+      option.value = cat.nombre;  
+      option.textContent = cat.nombre;
+      categoryFilter.appendChild(option);
+    });
+
+  } catch (error) {
+    console.error("❌ Hubo un problema al cargar las categorías:", error);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  llenarCategorias();
+});
+
+
 function applyFilters() {
   const searchTerm = searchInput.value.toLowerCase();
   const category = categoryFilter.value;
@@ -118,11 +140,8 @@ function applyFilters() {
   renderRestaurants(filtered);
 }
 
-// ==========================
-// MODAL DETALLE
-// ==========================
 function openDetail(restaurant) {
-  // Datos principales
+
   detailName.textContent = restaurant.nombre;
   detailImage.src = restaurant.imagen;
   detailImage.alt = restaurant.nombre;
@@ -130,7 +149,7 @@ function openDetail(restaurant) {
   detailLocation.textContent = restaurant.ubicacion ? `📍 ${restaurant.ubicacion}` : "";
   detailStars.innerHTML = `${"★".repeat(Math.round(restaurant.popularidad))}${"☆".repeat(5 - Math.round(restaurant.popularidad))}`;
 
-  // Reseñas asociadas
+
   const reseñasDelRestaurante = listaReseñas.filter(r => r.restaurante === restaurant._id);
 
   if (reseñasDelRestaurante.length > 0) {
@@ -140,7 +159,7 @@ function openDetail(restaurant) {
     detailScore.textContent = restaurant.popularidad?.toFixed(1) || "0.0";
   }
 
-  // Render reseñas
+
   reviewsList.innerHTML = "";
   if (reseñasDelRestaurante.length > 0) {
     reseñasDelRestaurante.forEach(r => {
@@ -160,7 +179,6 @@ function openDetail(restaurant) {
     reviewsList.innerHTML = `<div class="no-reviews">Aún no hay reseñas para este restaurante.</div>`;
   }
 
-  // Mostrar modal
   modalOverlay.style.display = "flex";
   modalOverlay.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
@@ -177,9 +195,7 @@ function closeModal() {
   document.body.style.overflow = "";
 }
 
-// ==========================
-// LOGIN SIMULADO
-// ==========================
+
 document.addEventListener("DOMContentLoaded", () => {
   const loginBtn = document.getElementById("login-btn");
   if (loginBtn) {
