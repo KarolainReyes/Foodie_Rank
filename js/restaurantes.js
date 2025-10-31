@@ -1,68 +1,6 @@
-// Datos (agregué campo 'location' y 'reviews' para la vista detalle)
-const restaurants = [
-  {
-    id: 1,
-    name: "Sabor Urbano",
-    img: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
-    description: "Cocina fusión moderna con ingredientes locales.",
-    rating: 4,
-    category: "Gourmet",
-    location: "Calle 45 #12-34, Ciudad",
-    reviews: [
-      { author: "María Sanchez", text: "Excelente restaurante, la comida deliciosa y la atención fue muy buena.", rating: 5 },
-      { author: "Camila Santos", text: "Probé la pizza recomendada por el chef, estuvo muy buena; la demora en el servicio fue un poco larga.", rating: 4 }
-    ]
-  },
-  {
-    id: 2,
-    name: "La Tavola Italiana",
-    img: "https://la-tavola.com/wp-content/uploads/2021/01/IMG_1603-cropped.jpg",
-    description: "Auténtica comida italiana con ambiente familiar.",
-    rating: 5,
-    category: "Gourmet",
-    location: "Av. Italia 200, Centro",
-    reviews: [
-      { author: "Pedro López", text: "Las pastas son como en casa. Recomiendo la lasaña.", rating: 5 }
-    ]
-  },
-  {
-    id: 3,
-    name: "Veggie Life",
-    img: "https://tse4.mm.bing.net/th/id/OIP.jDyMR-slevZAjStNAE-pxAHaE8?w=1000&h=668&rs=1&pid=ImgDetMain&o=7&rm=3",
-    description: "Especialidad en platos vegetarianos y smoothies.",
-    rating: 4,
-    category: "Vegetariana",
-    location: "Parque Verde 9",
-    reviews: []
-  },
-  {
-    id: 4,
-    name: "Bamboo Asian",
-    img: "https://images.unsplash.com/photo-1553621042-f6e147245754",
-    description: "Sabores del oriente en un solo lugar.",
-    rating: 5,
-    category: "Asiática",
-    location: "Calle del Sol 78",
-    reviews: [
-      { author: "Luis Pérez", text: "Excelente sushi y atención rápida.", rating: 5 },
-      { author: "Ana Gómez", text: "Buena relación calidad-precio.", rating: 4 }
-    ]
-  },
-  {
-    id: 5,
-    name: "Burger Spot",
-    img: "https://images.unsplash.com/photo-1550547660-d9450f859349",
-    description: "Las hamburguesas más jugosas de la ciudad.",
-    rating: 3,
-    category: "Fast Food",
-    location: "Av. Central 50",
-    reviews: [
-      { author: "Carlos Ruiz", text: "Hamburguesa jugosa pero tardaron mucho.", rating: 3 }
-    ]
-  }
-  // ... puedes añadir más objetos con el mismo formato
-];
-
+// ==========================
+// VARIABLES GLOBALES
+// ==========================
 const container = document.getElementById("restaurantsContainer");
 const searchInput = document.getElementById("searchInput");
 const categoryFilter = document.getElementById("categoryFilter");
@@ -79,86 +17,141 @@ const detailStars = document.getElementById("detailStars");
 const detailScore = document.getElementById("detailScore");
 const reviewsList = document.getElementById("reviewsList");
 
-// Render inicial
-renderRestaurants(restaurants);
+let listaRestaurantes = [];
+let listaReseñas = [];
 
-// Función para mostrar los restaurantes
+// ==========================
+// CARGA INICIAL
+// ==========================
+document.addEventListener("DOMContentLoaded", async () => {
+  await obtenerRestaurantes();
+  await obtenerReseñas();
+
+  renderRestaurants(listaRestaurantes);
+
+  searchInput.addEventListener("input", applyFilters);
+  categoryFilter.addEventListener("change", applyFilters);
+  rankingFilter.addEventListener("change", applyFilters);
+});
+
+// ==========================
+// FUNCIONES FETCH
+// ==========================
+async function obtenerRestaurantes() {
+  try {
+    const respuesta = await fetch("http://localhost:4000/restaurantes");
+    if (!respuesta.ok) throw new Error("Error al obtener los restaurantes");
+
+    const data = await respuesta.json();
+    listaRestaurantes = data;
+
+    console.log("✅ Restaurantes obtenidos:", listaRestaurantes);
+  } catch (error) {
+    console.error("❌ Hubo un problema con la solicitud GET de restaurantes:", error);
+  }
+}
+
+async function obtenerReseñas() {
+  try {
+    const respuesta = await fetch("http://localhost:4000/resenias");
+    if (!respuesta.ok) throw new Error("Error al obtener las reseñas");
+
+    const data = await respuesta.json();
+    listaReseñas = data;
+
+    console.log("✅ Reseñas obtenidas:", listaReseñas);
+  } catch (error) {
+    console.error("❌ Hubo un problema con la solicitud GET de reseñas:", error);
+  }
+}
+
+// ==========================
+// RENDER DE RESTAURANTES
+// ==========================
 function renderRestaurants(list) {
   container.innerHTML = "";
   list.forEach(r => {
     const card = document.createElement("div");
     card.classList.add("card");
     card.innerHTML = `
-      <img src="${r.img}" alt="${r.name}">
+      <img src="${r.imagen}" alt="${r.nombre}">
       <div class="card-content">
-        <h3>${r.name}</h3>
-        <p>${r.description}</p>
-        <div class="stars">${"★".repeat(r.rating)}${"☆".repeat(5 - r.rating)}</div>
+        <h3>${r.nombre}</h3>
+        <p>${r.ubicacion}</p>
+        <p>${r.categoria_info.nombre}</p>
+        <div class="stars">${"★".repeat(Math.round(r.popularidad))}${"☆".repeat(5 - Math.round(r.popularidad))}</div>
         <div class="card-actions" style="margin-top:0.8rem;">
-          <button class="btn-vermas" data-id="${r.id}">Ver más</button>
+          <button class="btn-vermas" data-id="${r._id}">Ver más</button>
         </div>
       </div>
     `;
     container.appendChild(card);
   });
 
-  // after cards are in DOM, attach listeners to "Ver más"
+  // Listeners para "Ver más"
   document.querySelectorAll(".btn-vermas").forEach(btn => {
     btn.addEventListener("click", (e) => {
-      const id = Number(e.currentTarget.dataset.id);
-      const restaurant = restaurants.find(x => x.id === id);
+      const id = e.currentTarget.dataset.id;
+      const restaurant = listaRestaurantes.find(x => x._id === id);
       if (restaurant) openDetail(restaurant);
     });
   });
 }
 
-// Filtro dinamico
+// ==========================
+// FILTROS
+// ==========================
 function applyFilters() {
   const searchTerm = searchInput.value.toLowerCase();
   const category = categoryFilter.value;
   const ranking = rankingFilter.value;
 
-  const filtered = restaurants.filter(r => {
+  const filtered = listaRestaurantes.filter(r => {
     const matchesSearch =
-      r.name.toLowerCase().includes(searchTerm) ||
-      (r.description && r.description.toLowerCase().includes(searchTerm));
-    const matchesCategory = category === "all" || r.category === category;
-    const matchesRanking = ranking === "all" || r.rating == ranking;
+      r.nombre.toLowerCase().includes(searchTerm) ||
+      (r.ubicacion && r.ubicacion.toLowerCase().includes(searchTerm));
+    const matchesCategory = category === "all" || r.categoria_info.nombre === category;
+    const matchesRanking = ranking === "all" || Math.round(r.popularidad) == ranking;
     return matchesSearch && matchesCategory && matchesRanking;
   });
 
   renderRestaurants(filtered);
 }
 
-// Eventos de filtro
-searchInput.addEventListener("input", applyFilters);
-categoryFilter.addEventListener("change", applyFilters);
-rankingFilter.addEventListener("change", applyFilters);
-
-/* ---------- Modal / Vista detalle ---------- */
-
+// ==========================
+// MODAL DETALLE
+// ==========================
 function openDetail(restaurant) {
-  // rellenar datos
-  detailName.textContent = restaurant.name;
-  detailImage.src = restaurant.img;
-  detailImage.alt = restaurant.name;
-  detailDescription.textContent = restaurant.description || "";
-  detailLocation.textContent = restaurant.location ? `Ubicación: ${restaurant.location}` : "";
-  detailStars.innerHTML = `${"★".repeat(restaurant.rating)}${"☆".repeat(5 - restaurant.rating)}`;
-  detailScore.textContent = computeAverageScore(restaurant).toFixed(1);
+  // Datos principales
+  detailName.textContent = restaurant.nombre;
+  detailImage.src = restaurant.imagen;
+  detailImage.alt = restaurant.nombre;
+  detailDescription.textContent = restaurant.descripcion || "Sin descripción disponible";
+  detailLocation.textContent = restaurant.ubicacion ? `📍 ${restaurant.ubicacion}` : "";
+  detailStars.innerHTML = `${"★".repeat(Math.round(restaurant.popularidad))}${"☆".repeat(5 - Math.round(restaurant.popularidad))}`;
 
-  // reviews
+  // Reseñas asociadas
+  const reseñasDelRestaurante = listaReseñas.filter(r => r.restaurante === restaurant._id);
+
+  if (reseñasDelRestaurante.length > 0) {
+    const promedio = reseñasDelRestaurante.reduce((acc, r) => acc + r.calificacion, 0) / reseñasDelRestaurante.length;
+    detailScore.textContent = promedio.toFixed(1);
+  } else {
+    detailScore.textContent = restaurant.popularidad?.toFixed(1) || "0.0";
+  }
+
+  // Render reseñas
   reviewsList.innerHTML = "";
-  if (restaurant.reviews && restaurant.reviews.length) {
-    restaurant.reviews.forEach(r => {
+  if (reseñasDelRestaurante.length > 0) {
+    reseñasDelRestaurante.forEach(r => {
       const rev = document.createElement("div");
       rev.classList.add("review");
       rev.innerHTML = `
-        <div class="review-author">${r.author}</div>
-        <div class="review-text">${r.text}</div>
+        <div class="review-author"><strong>${r.usuario_info.nombre || "Anónimo"}</strong></div>
+        <div class="review-text">${r.comentario || ""}</div>
         <div class="review-meta">
-          <div class="review-rating">${"★".repeat(r.rating)}${"☆".repeat(5 - r.rating)}</div>
-          <div class="review-score">${r.rating}.0</div>
+          <div class="review-rating">${"★".repeat(r.calificacion)}${"☆".repeat(5 - r.calificacion)}</div>
+          <div class="review-score">${r.calificacion}.0</div>
         </div>
       `;
       reviewsList.appendChild(rev);
@@ -167,20 +160,12 @@ function openDetail(restaurant) {
     reviewsList.innerHTML = `<div class="no-reviews">Aún no hay reseñas para este restaurante.</div>`;
   }
 
-  // mostrar modal
+  // Mostrar modal
   modalOverlay.style.display = "flex";
   modalOverlay.setAttribute("aria-hidden", "false");
-  // evitar scroll del body
   document.body.style.overflow = "hidden";
 }
 
-function computeAverageScore(restaurant) {
-  if (!restaurant.reviews || restaurant.reviews.length === 0) return restaurant.rating || 0;
-  const sum = restaurant.reviews.reduce((acc, r) => acc + r.rating, 0);
-  return sum / restaurant.reviews.length;
-}
-
-// cerrar modal
 modalCloseBtn.addEventListener("click", closeModal);
 modalOverlay.addEventListener("click", (e) => {
   if (e.target === modalOverlay) closeModal();
@@ -192,18 +177,16 @@ function closeModal() {
   document.body.style.overflow = "";
 }
 
-/* ---------- Login modal (tu código anterior esperaba modal-overlay) ---------- */
+// ==========================
+// LOGIN SIMULADO
+// ==========================
 document.addEventListener("DOMContentLoaded", () => {
   const loginBtn = document.getElementById("login-btn");
-
-  // Nota: ya usamos modal-overlay para la vista detalle; aquí asumo que
-  // el login hace otra cosa. Si quieres que login abra otro modal, hay que crear otro overlay.
-  loginBtn.addEventListener("click", () => {
-    // Por ahora lo reutilizamos para demo: mostrar un prompt simple o abrir la vista detalle vacía.
-    // Mejor: mostrar un alert o tu modal real si lo tienes separado.
-    const name = prompt("Ingresa tu nombre para simular login:");
-    if (name) alert(`Hola, ${name}! (login simulado)`);
-  });
+  if (loginBtn) {
+    loginBtn.addEventListener("click", () => {
+      const name = prompt("Ingresa tu nombre para simular login:");
+      if (name) alert(`Hola, ${name}! (login simulado)`);
+    });
+  }
 });
-
 
