@@ -1,49 +1,82 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Foodie Rank | Restaurantes</title>
-  <link rel="stylesheet" href="../css/root.css">
-  <link rel="stylesheet" href="../css/restaurante_style.css">
-</head>
-<body class="container">
-  <section class="hero">
-    <!-- NAVBAR -->
-    <nav class="navbar">
-      <div class="filter-bar">
-        <input type="text" id="searchInput" placeholder="Buscar restaurante..." />
-        <select id="categoryFilter">
-          <option value="all">Todas las categorías</option>
-          <option value="Fast Food">Fast Food</option>
-          <option value="Gourmet">Gourmet</option>
-          <option value="Vegetariana">Vegetariana</option>
-          <option value="Asiática">Asiática</option>
-        </select>
-        <select id="rankingFilter">
-          <option value="all">Todos los rankings</option>
-          <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
-          <option value="4">⭐️⭐️⭐️⭐️</option>
-          <option value="3">⭐️⭐️⭐️</option>
-        </select>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foodie Rank | Restaurantes</title>
+    <link rel="stylesheet" href="../css/root.css" />
+    <link rel="stylesheet" href="../css/restaurante_style.css" />
+  </head>
+  <body class="container">
+    <section class="hero">
+      <!-- NAVBAR -->
+      <nav class="navbar">
+        <div class="filter-bar">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Buscar restaurante..."
+          />
+          <select id="categoryFilter">
+            <option value="all">Todas las categorías</option>
+            <option value="Fast Food">Fast Food</option>
+            <option value="Gourmet">Gourmet</option>
+            <option value="Vegetariana">Vegetariana</option>
+            <option value="Asiática">Asiática</option>
+          </select>
+          <select id="rankingFilter">
+            <option value="all">Todos los rankings</option>
+            <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
+            <option value="4">⭐️⭐️⭐️⭐️</option>
+            <option value="3">⭐️⭐️⭐️</option>
+          </select>
+        </div>
+        <div class="navita">
+          <ul>
+            <li><a href="../index.html" class="active">Home</a></li>
+            <li><a href="">Top Restaurantes</a></li>
+            <li><a href="#">Categorías</a></li>
+            <li><a href="#">Platos</a></li>
+          </ul>
+          <button id="login-btn">Log In</button>
+        </div>
+      </nav>
+      <!-- LISTA DE RESTAURANTES -->
+      <h2 class="section-title">Restaurantes destacados</h2>
+      <div class="restaurants-container" id="restaurantsContainer">
+        <!-- Tarjetas generadas dinámicamente -->
       </div>
-      <div class="navita">
-        <ul>
-        <li><a href="#" class="active">Home</a></li>
-        <li><a href="./html/restaurantes.html">Top Restaurantes</a></li>
-        <li><a href="#">Categorías</a></li>
-        <li><a href="#">Platos</a></li>
-      </ul>
-      <button id="login-btn">Log In</button>
-      </div>
-    </nav>
-    <!-- LISTA DE RESTAURANTES -->
-    <h2 class="section-title">Restaurantes destacados</h2>
-    <div class="restaurants-container" id="restaurantsContainer">
-      <!-- Tarjetas generadas dinámicamente -->
-    </div>
-  </section>
+    </section>
 
-  <script src="../js/restaurantes.js"></script>
-</body>
+    <div id="modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog">
+      <div class="detail-modal" role="document">
+        <button class="modal-close" id="modalCloseBtn" aria-label="Cerrar detalle">×</button>
+
+        <div class="modal-header">
+          <h3 id="detailName">Nombre Restaurante</h3>
+          <div class="thin-divider"></div>
+        </div>
+
+        <div class="modal-body">
+          <div class="modal-left">
+            <img id="detailImage" src="" alt="Imagen restaurante" />
+            <div class="rating-large">
+              <div id="detailStars" class="stars"></div>
+              <div id="detailScore" class="score">4.5</div>
+            </div>
+            <p id="detailDescription"></p>
+            <p class="location" id="detailLocation"></p>
+          </div>
+
+          <aside class="modal-right">
+            <h4>Reseñas</h4>
+            <div id="reviewsList" class="reviews-list">
+              <!-- reseñas generadas -->
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+    <script src="../js/restaurantes.js"></script>
+  </body>
 </html>
