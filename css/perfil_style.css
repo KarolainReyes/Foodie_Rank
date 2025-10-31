@@ -186,3 +186,58 @@
 #saveBtn:hover {
   background-color: #c63b27;
 }
+
+/* ===== SECCIONES ===== */
+.section {
+  display: none;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== RESEÑAS ===== */
+.reseñas-container {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.reseña-card {
+  background: #f6e6d4;
+  border-radius: 0.8rem;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.reseña-card:hover {
+  transform: translateY(-3px);
+}
+
+.reseña-card h4 {
+  color: #b43422;
+  margin-bottom: 0.3rem;
+}
+
+.reseña-card p {
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+.reseña-card .rating {
+  color: gold;
+  font-size: 1.1rem;
+}
