@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foodie Rank | Platos</title>
+  <link rel="stylesheet" href="../css/root.css" />
+  <link rel="stylesheet" href="../css/restaurante_style.css" />
+</head>
+<body class="container">
+
+  <section class="hero">
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="filter-bar">
+        <input type="text" id="searchInput" placeholder="Buscar plato..." />
+        <select id="restaurantFilter">
+          <option value="all">Todos los restaurantes</option>
+        </select>
+      </div>
+      <div class="navita">
+        <ul>
+          <li><a href="../index.html" class="active">Home</a></li>
+          <li><a href="../restaurantes.html">Restaurantes</a></li>
+          <li><a href="#">Platos</a></li>
+        </ul>
+        <button id="login-btn">Log In</button>
+      </div>
+    </nav>
+
+    <!-- LISTADO DE PLATOS -->
+    <h2 class="section-title">Todos los Platos</h2>
+    <div class="plates-container" id="platesContainer">
+      <!-- Platos generados dinámicamente -->
+    </div>
+  </section>
+
+  <script src="../js/platos.js"></script>
+</body>
+</html>
