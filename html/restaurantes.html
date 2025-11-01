@@ -7,23 +7,15 @@
     <link rel="stylesheet" href="../css/root.css" />
     <link rel="stylesheet" href="../css/restaurante_style.css" />
   </head>
-  <script src="../js/auth.js"></script>
   <body class="container">
+
     <section class="hero">
       <!-- NAVBAR -->
       <nav class="navbar">
         <div class="filter-bar">
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="Buscar restaurante..."
-          />
+          <input type="text" id="searchInput" placeholder="Buscar restaurante..." />
           <select id="categoryFilter">
             <option value="all">Todas las categorías</option>
-            <option value="Italiana">Italiana</option>
-            <option value="Gourmet">Gourmet</option>
-            <option value="Vegetariana">Vegetariana</option>
-            <option value="Asiática">Asiática</option>
           </select>
           <select id="rankingFilter">
             <option value="all">Todos los rankings</option>
@@ -40,25 +32,23 @@
             <li><a href="./restaurantes.html">Top Restaurantes</a></li>
             <li><a href="./platos.html">Platos</a></li>
           </ul>
-          <button id="login-btn">Log In</button>
         </div>
       </nav>
-      <!-- LISTA DE RESTAURANTES -->
+
       <h2 class="section-title">Restaurantes destacados</h2>
       <div class="restaurants-container" id="restaurantsContainer">
         <!-- Tarjetas generadas dinámicamente -->
       </div>
     </section>
 
-    <div id="modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog">
-      <div class="detail-modal" role="document">
-        <button class="modal-close" id="modalCloseBtn" aria-label="Cerrar detalle">×</button>
-
+    <!-- Modal detalle restaurante -->
+    <div id="detail-modal-overlay" class="modal-overlay" aria-hidden="true">
+      <div class="detail-modal">
+        <button class="modal-close" id="modalCloseBtn">×</button>
         <div class="modal-header">
           <h3 id="detailName">Nombre Restaurante</h3>
           <div class="thin-divider"></div>
         </div>
-
         <div class="modal-body">
           <div class="modal-left">
             <img id="detailImage" src="" alt="Imagen restaurante" />
@@ -69,16 +59,27 @@
             <p id="detailDescription"></p>
             <p class="location" id="detailLocation"></p>
           </div>
-
           <aside class="modal-right">
             <h4>Reseñas</h4>
-            <div id="reviewsList" class="reviews-list">
-              <!-- reseñas generadas -->
-            </div>
+            <div id="reviewsList" class="reviews-list"></div>
           </aside>
         </div>
       </div>
     </div>
+
+    <!-- Modal login -->
+    <div id="login-overlay" class="login-overlay">
+      <div class="login-modal">
+        <h3>Iniciar sesión</h3>
+        <form id="login-form">
+          <input type="email" placeholder="Correo" required>
+          <input type="password" placeholder="Contraseña" required>
+          <button type="submit">Ingresar</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="../js/auth.js"></script>
     <script src="../js/login.js"></script>
     <script src="../js/restaurantes.js"></script>
   </body>
