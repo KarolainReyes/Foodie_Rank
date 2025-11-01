@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const navbar = document.querySelector(".navbar");
+  const currentPage = window.location.pathname.split("/").pop(); 
 
   try {
     const response = await fetch("http://localhost:4000/usuarios/logged/verificar", {
@@ -7,32 +8,31 @@ document.addEventListener("DOMContentLoaded", async () => {
       credentials: "include"
     });
 
-    if (!response.ok) return; // No hace nada si no hay usuario
+    if (!response.ok) return;
 
     const data = await response.json();
     const usuario = data.usuario;
     if (!usuario) return;
 
-    // Eliminar botón de login y crear botón según rol
     const oldBtn = navbar.querySelector("#login-btn");
     if (oldBtn) oldBtn.remove();
 
-    let newButton;
+    let newButton = document.createElement("button");
     if (usuario.rol === "Admin") {
-      newButton = document.createElement("button");
       newButton.textContent = "Gestión";
+      // Redirigir correctamente desde cualquier página
       newButton.addEventListener("click", () => {
-        window.location.href = "./html/admin.html";
+        window.location.href = currentPage === "index.html" ? "./html/admin.html" : "../html/admin.html";
       });
     } else {
-      newButton = document.createElement("button");
       newButton.textContent = "Mi perfil";
       newButton.addEventListener("click", () => {
-        window.location.href = "./html/perfil.html";
+        window.location.href = currentPage === "index.html" ? "./html/perfil_user.html" : "../html/perfil_user.html";
       });
     }
 
     navbar.appendChild(newButton);
+
   } catch (err) {
     console.error("Error verificando usuario:", err);
   }
