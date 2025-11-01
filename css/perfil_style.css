@@ -91,7 +91,7 @@
   width: 100%;
 }
 
-.menu-btn {
+.menu-btn, .active {
   display: flex;
   align-items: center;
   gap: 0.8rem;
