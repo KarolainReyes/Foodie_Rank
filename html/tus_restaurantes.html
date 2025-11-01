@@ -15,19 +15,7 @@
         <h2 class="sidebar-title">Mis restaurantes</h2>
         <div class="restaurants-list" id="userRestaurants">
           <!-- Restaurantes renderizados dinámicamente -->
-          <div class="restaurant-card active">
-            <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" alt="Pizza Place" />
-            <div class="card-info">
-              <h4>Pizza Lovers</h4>
-            </div>
-          </div>
-
-          <div class="restaurant-card">
-            <img src="https://images.unsplash.com/photo-1553621042-f6e147245754" alt="Food Mix" />
-            <div class="card-info">
-              <h4>Sabores del Mundo</h4>
-            </div>
-          </div>
+          
         </div>
 
         <button id="addRestaurantBtn" class="add-btn">+ Agregar restaurante</button>
@@ -44,7 +32,8 @@
               alt="Foto del restaurante"
               class="preview-img"
             />
-            <input type="file" id="foto" accept="image/*" />
+            <p>URL:</p>
+            <input type="text" id="foto" accept="image/*" />
           </div>
 
           <div class="form-section">
@@ -54,6 +43,17 @@
               id="nombre"
               placeholder="Ej. Pizza Lovers"
               value="Pizza Lovers"
+              required
+            />
+          </div>
+
+          <div class="form-section">
+            <label for="direccion">Direccion:</label>
+            <input
+              type="text"
+              id="direccion"
+              placeholder="Ej. Calle 15"
+              value="Ej. Calle 15"
               required
             />
           </div>
@@ -69,7 +69,9 @@
           </div>
 
           <button type="submit" id="saveBtn">Enviar solicitud</button>
+          
         </form>
+        <h3> Platos </h3>
       </main>
     </section>
 
