@@ -204,8 +204,8 @@ document.addEventListener('DOMContentLoaded', () => {
       form.innerHTML = `
         <label>Nombre:</label>
         <input type="text" name="nombre" placeholder="Nombre del plato" required/>
-        <label>Descripción:</label>
-        <textarea name="descripcion" placeholder="Descripción del plato" required></textarea>
+        <label>Descripcion:</label>
+        <textarea name="descripcion" placeholder="Descripcion del plato" required></textarea>
         <label>Precio:</label>
         <input type="text" name="precio" placeholder="Precio" required/>
         <label>Imagen (URL):</label>
