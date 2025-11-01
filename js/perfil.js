@@ -3,14 +3,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const baseURL = 'http://localhost:4000';
 
   const urls = {
-    me: `${baseURL}/usuarios/logged/verificar`,      // GET → info del usuario logueado
-    updateUser: `${baseURL}/usuarios/`,             // PATCH → actualizar usuario (append id)
-    userReseñas: `${baseURL}/resenias/`,      // GET → reseñas por userId
-    createReseña: `${baseURL}/resenias`,           // POST → crear reseña
-    updateReseña: `${baseURL}/resenias/`,          // PATCH → actualizar reseña (append id)
-    deleteReseña: `${baseURL}/resenias/`,          // DELETE → eliminar reseña (append id)
-    restaurantes: `${baseURL}/restaurantes`,       // GET → listar restaurantes
-    restaurantesPage: '/restaurantes.html'         // Redirección
+    updateUser: `${baseURL}/usuarios/`,            
+    userReseñas: `${baseURL}/resenias/`,           
+    createReseña: `${baseURL}/resenias`,           
+    updateReseña: `${baseURL}/resenias/`,          
+    deleteReseña: `${baseURL}/resenias/`,          
+    restaurantes: `${baseURL}/restaurantes`,       
+    restaurantesPage: './tus_restaurantes.html'         
   };
 
   // BOTONES
@@ -22,9 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const reseñasSection = document.getElementById('reseñas-section');
 
   function mostrarSeccion(seccion) {
-    perfilSection.classList.add('hidden');
-    reseñasSection.classList.add('hidden');
-    seccion.classList.remove('hidden');
+    perfilSection.classList.remove('active');
+    reseñasSection.classList.remove('active');
+    seccion.classList.add('active');
   }
 
   perfilBtn.addEventListener('click', () => {
@@ -44,18 +43,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---------------- PERFIL ----------------
   async function cargarPerfil() {
     try {
-      const res = await fetch(urls.me, { credentials: 'include' }); // GET
-      if (!res.ok) throw new Error('No autorizado');
-      const data = await res.json();
-      const user = data.usuario;
+      const usuario = JSON.parse(localStorage.getItem("usuarioInfo"));
+      if (!usuario || !usuario.id) throw new Error("Usuario no autenticado");
 
       const userContainer = document.getElementById('userContainer');
       userContainer.innerHTML = `
         <form id="perfilForm" class="perfil-form">
           <label>Nombre</label>
-          <input type="text" name="nombre" value="${user.nombre}" />
+          <input type="text" name="nombre" value="${usuario.nombre || ''}" />
           <label>Correo</label>
-          <input type="email" name="correo" value="${user.correo}" />
+          <input type="email" name="correo" value="${usuario.correo || ''}" />
           <button type="submit" id="saveBtn">Guardar cambios</button>
         </form>
       `;
@@ -68,14 +65,22 @@ document.addEventListener('DOMContentLoaded', () => {
           correo: formData.get('correo')
         };
 
-        const resUpdate = await fetch(urls.updateUser + user._id, {
+        const resUpdate = await fetch(urls.updateUser + usuario.id, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(dataUpdate),
           credentials: 'include'
         });
-        if (resUpdate.ok) alert('Perfil actualizado!');
-        else alert('Error al actualizar perfil');
+
+        if (resUpdate.ok) {
+          alert('Perfil actualizado!');
+          // Actualizar localStorage
+          usuario.nombre = dataUpdate.nombre;
+          usuario.correo = dataUpdate.correo;
+          localStorage.setItem("usuarioInfo", JSON.stringify(usuario));
+        } else {
+          alert('Error al actualizar perfil');
+        }
       });
 
     } catch (err) {
@@ -86,13 +91,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---------------- RESEÑAS ----------------
   async function cargarReseñas() {
     try {
-      const meRes = await fetch(urls.me, { credentials: 'include' });
-      if (!meRes.ok) throw new Error('No autorizado');
-      const data = await meRes.json();
-      const user = data.usuario;
-      console.log(user._id)
-      const resReseñas = await fetch(urls.userReseñas + user._id, { credentials: 'include' });
-       // GET
+      const usuario = JSON.parse(localStorage.getItem("usuarioInfo"));
+      if (!usuario || !usuario.id) throw new Error("Usuario no autenticado");
+
+      const userId = usuario.id;
+      console.log("ID del usuario desde localStorage:", userId);
+
+      const resReseñas = await fetch(urls.userReseñas + userId, { credentials: 'include' });
+      if (!resReseñas.ok) throw new Error("Error al obtener reseñas");
       const reseñas = await resReseñas.json();
 
       const container = document.getElementById('reseñasContainer');
@@ -109,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         container.appendChild(div);
 
-        // Editar reseña → PATCH
         div.querySelector('.edit-btn').addEventListener('click', async () => {
           const nuevoComentario = prompt('Editar comentario:', r.comentario);
           const nuevaCalificacion = prompt('Editar calificación (1-5):', r.calificacion);
@@ -127,7 +132,6 @@ document.addEventListener('DOMContentLoaded', () => {
           cargarReseñas();
         });
 
-        // Eliminar reseña → DELETE
         div.querySelector('.delete-btn').addEventListener('click', async () => {
           if (!confirm('¿Seguro que deseas eliminar esta reseña?')) return;
           await fetch(urls.deleteReseña + r._id, { method: 'DELETE', credentials: 'include' });
@@ -135,7 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
 
-      // Crear nueva reseña
       const crearBtn = document.createElement('button');
       crearBtn.textContent = 'Crear nueva reseña';
       crearBtn.addEventListener('click', crearReseñaForm);
@@ -173,9 +176,11 @@ document.addEventListener('DOMContentLoaded', () => {
       form.addEventListener('submit', async e => {
         e.preventDefault();
         const dataForm = Object.fromEntries(new FormData(form));
-        const meRes = await fetch(urls.me, { credentials: 'include' });
-        const dataUser = await meRes.json();
-        dataForm.usuario = dataUser.usuario._id;
+
+        const usuario = JSON.parse(localStorage.getItem("usuarioInfo"));
+        if (!usuario || !usuario.id) throw new Error("Usuario no autenticado");
+
+        dataForm.usuario = usuario.id;
 
         await fetch(urls.createReseña, {
           method: 'POST',
@@ -190,5 +195,9 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error(err);
     }
   }
+
+  // --- CARGA INICIAL ---
+  mostrarSeccion(perfilSection);
+  cargarPerfil();
 
 });
