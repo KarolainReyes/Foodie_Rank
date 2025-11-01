@@ -196,13 +196,3 @@ function closeModal() {
 }
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  const loginBtn = document.getElementById("login-btn");
-  if (loginBtn) {
-    loginBtn.addEventListener("click", () => {
-      const name = prompt("Ingresa tu nombre para simular login:");
-      if (name) alert(`Hola, ${name}! (login simulado)`);
-    });
-  }
-});
-
