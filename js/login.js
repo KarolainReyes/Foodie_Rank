@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Guardar usuario en localStorage
   function guardarUsuarioLocalStorage(usuario) {
-    const usuarioLocale = { id: usuario._id, nombre: usuario.nombre};
+    const usuarioLocale = { id: usuario._id, nombre: usuario.nombre,correo:usuario.correo};
     localStorage.setItem("usuarioInfo", JSON.stringify(usuarioLocale));
     console.log("ID del usuario:", usuarioLocale.id);
     console.log("Nombre del usuario:", usuarioLocale.nombre);
