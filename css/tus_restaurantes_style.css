@@ -5,6 +5,7 @@
   font-family: var(--font-family, "Poppins", sans-serif);
 }
 
+
 /* ===== ASIDE ===== */
 .sidebar {
   width: 30%;
@@ -144,6 +145,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  flex-direction: column;
 }
 
 .restaurant-form {
