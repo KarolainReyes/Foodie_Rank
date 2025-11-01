@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
       newButton.id = "user-btn";
       newButton.textContent = "Mi perfil";
       newButton.addEventListener("click", () => {
-        window.location.href = "./html/perfil.html";
+        window.location.href = "./html/perfil_user.html";
       });
     }
 
