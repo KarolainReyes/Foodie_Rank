@@ -194,6 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ---------------- CREAR NUEVO PLATO ----------------
     const nuevoBtn = document.createElement('button');
     nuevoBtn.textContent = '+ Crear nuevo plato';
+    nuevoBtn.classList.add("crear-plato")
     nuevoBtn.type = 'button';
     nuevoBtn.addEventListener('click', () => {
       if (!restauranteActivo) return alert('Selecciona un restaurante');
