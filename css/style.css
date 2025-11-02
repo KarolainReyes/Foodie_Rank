@@ -75,12 +75,10 @@
   justify-content: end;
   align-items: center;
   width: 100%;
-  height: 5%;
   background-color: var(--color-bg-mid);
   border-radius: var(--radius);
   top: 1rem;
   margin-top: 0;
-  gap: 5rem;
 }
 
 .navbar .logo {
@@ -258,6 +256,21 @@
   text-decoration: underline;
 }
 
+.btn-vermas, .boton-dinamico {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: transform 0.2s;
+  align-self: center;
+  justify-self: center;
+}
+
+.btn-vermas:hover, .boton-dinamico {
+  transform: scale(1.05);
+}
 
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.95); }
@@ -281,3 +294,14 @@
     gap: 1rem;
   }
 }
+
+.navita { 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3vw;
+}
+
+
+
+
