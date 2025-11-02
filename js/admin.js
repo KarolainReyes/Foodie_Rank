@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let currentSection = null;
 
-  // Endpoints de ejemplo, solo placeholders
+  // Endpoints de ejemplo
   const apiUrls = {
     "Mi perfil": "http://localhost:4000/usuarios/logged/verificar",
     "Usuarios": "http://localhost:4000/usuarios",
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     limpiarContenido();
     currentSection = nombreEntidad;
 
-    if(nombreEntidad === "Mi perfil") {
+    if (nombreEntidad === "Mi perfil") {
       await cargarPerfil();
       return;
     }
@@ -31,11 +31,11 @@ document.addEventListener("DOMContentLoaded", () => {
     container.classList.add("entity-container");
 
     let datos = [];
-    if(apiUrls[nombreEntidad]) {
+    if (apiUrls[nombreEntidad]) {
       try {
         const res = await fetch(apiUrls[nombreEntidad], { credentials: "include" });
-        if(res.ok) datos = await res.json();
-      } catch(err) {
+        if (res.ok) datos = await res.json();
+      } catch (err) {
         console.error(`Error cargando ${nombreEntidad}:`, err);
       }
     }
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const div = document.createElement("div");
       div.classList.add("entity-card");
 
-      if(nombreEntidad === "Usuarios") {
+      if (nombreEntidad === "Usuarios") {
         div.innerHTML = `
           <p><strong>Nombre:</strong> ${item.nombre}</p>
           <p><strong>Email:</strong> ${item.correo}</p>
@@ -56,11 +56,13 @@ document.addEventListener("DOMContentLoaded", () => {
           div.remove();
         });
 
-      } else if(nombreEntidad === "Restaurantes") {
+      } else if (nombreEntidad === "Restaurantes") {
         div.innerHTML = `
           <p><strong>Nombre:</strong> ${item.nombre}</p>
           <p><strong>Ubicación:</strong> ${item.ubicacion}</p>
-          <img src="${item.imagen}" width="150" />
+          <p><strong>Categoria:</strong> ${item.categoria_info.nombre}</p>
+          <p><strong>Descripcion:</strong> ${item.descripcion}</p>
+          <img src="${item.imagen}" width="100" />
           <button class="delete-btn">Eliminar</button>
         `;
         div.querySelector(".delete-btn").addEventListener("click", async () => {
@@ -68,9 +70,14 @@ document.addEventListener("DOMContentLoaded", () => {
           div.remove();
         });
 
-      } else if(nombreEntidad === "Solicitudes") {
+      } else if (nombreEntidad === "Solicitudes") {
         div.innerHTML = `
-          <pre>${JSON.stringify(item, null, 2)}</pre>
+          <p><strong>Nombre:</strong> ${item.nombre}</p>
+          <p><strong>Ubicación:</strong> ${item.ubicacion}</p>
+          <p><strong>Descripcion:</strong> ${item.descripcion}</p>
+          <p><strong>Categoria:</strong> ${item.categoria.nombre}</p>
+          <p><strong>Categoria:</strong> ${item.usuario.nombre}</p>
+          <img src="${item.imagen}" width="100" />
           <button class="aprobar-btn">Aprobar</button>
           <button class="delete-btn">Eliminar</button>
         `;
@@ -82,10 +89,10 @@ document.addEventListener("DOMContentLoaded", () => {
               method: "PATCH",
               credentials: "include"
             });
-            if(!res.ok) throw new Error("Error al aceptar solicitud");
-            div.remove(); // eliminar tarjeta de la vista
+            if (!res.ok) throw new Error("Error al aceptar solicitud");
+            div.remove();
             alert("Solicitud aprobada y convertida en restaurante");
-          } catch(err) {
+          } catch (err) {
             console.error(err);
             alert("Error aprobando solicitud");
           }
@@ -98,16 +105,16 @@ document.addEventListener("DOMContentLoaded", () => {
               method: "DELETE",
               credentials: "include"
             });
-            if(!res.ok) throw new Error("Error al rechazar solicitud");
-            div.remove(); // eliminar tarjeta de la vista
+            if (!res.ok) throw new Error("Error al rechazar solicitud");
+            div.remove();
             alert("Solicitud rechazada y eliminada");
-          } catch(err) {
+          } catch (err) {
             console.error(err);
             alert("Error eliminando solicitud");
           }
         });
 
-      } else if(nombreEntidad === "Categorias") {
+      } else if (nombreEntidad === "Categorias") {
         div.innerHTML = `
           <label>Nombre:</label>
           <input type="text" value="${item.nombre}" class="categoria-nombre" />
@@ -136,15 +143,15 @@ document.addEventListener("DOMContentLoaded", () => {
       container.appendChild(div);
     });
 
-    // Añadir botón para entidades excepto Usuarios y Solicitudes y Restaurantes
-    if(nombreEntidad !== "Usuarios" && nombreEntidad !== "Solicitudes" && nombreEntidad !== "Restaurantes") {
+    // Añadir botón para crear entidades
+    if (nombreEntidad !== "Usuarios" && nombreEntidad !== "Solicitudes" && nombreEntidad !== "Restaurantes") {
       const addBtn = document.createElement("button");
       addBtn.textContent = `+ Añadir ${nombreEntidad}`;
 
       addBtn.addEventListener("click", async () => {
-        addBtn.style.display = "none"; // ocultar mientras se crea el formulario
+        addBtn.style.display = "none";
         const existingForm = container.querySelector(".add-entity-form");
-        if(existingForm) existingForm.remove();
+        if (existingForm) existingForm.remove();
 
         const form = document.createElement("form");
         form.classList.add("add-entity-form");
@@ -166,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
           e.preventDefault();
           const nombre = form.nombre.value.trim();
           const descripcion = form.descripcion.value.trim();
-          if(!nombre || !descripcion) return alert("Todos los campos son obligatorios");
+          if (!nombre || !descripcion) return alert("Todos los campos son obligatorios");
 
           try {
             const res = await fetch(apiUrls["Categorias"], {
@@ -175,10 +182,10 @@ document.addEventListener("DOMContentLoaded", () => {
               body: JSON.stringify({ nombre, descripcion }),
               credentials: "include"
             });
-            if(!res.ok) throw new Error("Error al crear la categoría");
+            if (!res.ok) throw new Error("Error al crear la categoría");
             alert("Categoría creada correctamente");
             cargarEntidad("Categorias");
-          } catch(err) {
+          } catch (err) {
             console.error(err);
             alert("Error creando categoría");
             addBtn.style.display = "inline-block";
@@ -186,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         container.appendChild(form);
-        container.appendChild(addBtn); // mantener botón abajo del form
+        container.appendChild(addBtn);
       });
 
       container.appendChild(addBtn);
@@ -199,19 +206,52 @@ document.addEventListener("DOMContentLoaded", () => {
     limpiarContenido();
     try {
       const res = await fetch(apiUrls["Mi perfil"], { credentials: "include" });
-      if(!res.ok) return;
+      if (!res.ok) return;
       const data = await res.json();
       const usuario = data.usuario;
 
       const container = document.createElement("div");
       container.classList.add("perfil-container-admin");
       container.innerHTML = `
+      <img src="../images/user.png" style="max-width: 25vw;">
         <h2>${usuario.nombre}</h2>
         <p><strong>Correo:</strong> ${usuario.correo}</p>
         <p><strong>Rol:</strong> ${usuario.rol}</p>
+        <button class="cerrar-sesion">Cerrar Sesión</button>
       `;
       perfilContent.appendChild(container);
-    } catch(err) {
+
+      // 🔹 BOTÓN CERRAR SESIÓN
+      const cerrarSesionBtn = container.querySelector(".cerrar-sesion");
+      cerrarSesionBtn.addEventListener("click", async () => {
+        try {
+          // Llama al backend para eliminar cookies httpOnly
+          await fetch("http://localhost:4000/usuarios/logout", {
+            method: "POST",
+            credentials: "include",
+          });
+
+          // 🔹 Elimina cookie 'usuario' desde el navegador
+          document.cookie = "usuario=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+          // 🔹 Limpia cookies visibles
+          document.cookie.split(";").forEach(c => {
+            document.cookie = c
+              .replace(/^ +/, "")
+              .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+          });
+
+          // 🔹 Limpia almacenamiento
+          localStorage.clear();
+          sessionStorage.clear();
+
+          // 🔹 Redirige
+          window.location.href = "../index.html";
+        } catch (error) {
+          console.error("Error cerrando sesión:", error);
+        }
+      });
+    } catch (err) {
       console.error("Error cargando perfil:", err);
     }
   }
