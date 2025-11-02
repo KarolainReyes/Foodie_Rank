@@ -104,10 +104,12 @@
   display: flex;
   flex-direction: row;
   gap: 7%;
-  justify-content: center;
+  justify-content:end;
   align-items: center;
   width: 40%;
+  align-self:center;
 }
+
 
 .navbar .logo {
   font-size: 1.4rem;
@@ -187,12 +189,12 @@
   box-sizing: content-box;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   width: 100%;
 }
 
 .card, .plate-card {
-  background: #ceb06a8e;
+  background: #726c5f8e;
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: 0 4px 10px var(--shadow);
@@ -214,6 +216,8 @@
 
 .card-content, .plate-content {
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-content h3 , .plate-content h3{
@@ -229,7 +233,7 @@
 
 .stars {
   color: gold;
-  font-size: 1rem;
+  font-size: 2rem;
 }
 
 /* --------------------------
@@ -508,4 +512,20 @@
     flex-direction: column;
     gap: 1rem;
   }
+}
+
+.btn-vermas, .boton-dinamico {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: transform 0.2s;
+  align-self: center;
+  justify-self: center;
+}
+
+.btn-vermas:hover, .boton-dinamico {
+  transform: scale(1.05);
 }
