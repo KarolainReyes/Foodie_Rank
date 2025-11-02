@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const navbar = document.querySelector(".navbar");
+  const navbar = document.querySelector(".navita ul");
   const loginOverlay = document.getElementById("modal-overlay");
   const loginForm = document.getElementById("login-form");
 
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loginBtn = document.createElement("button");
     loginBtn.id = "login-btn";
     loginBtn.textContent = "Log In";
-    navbar.appendChild(loginBtn);
+    navbar.insertAdjacentElement("afterend",loginBtn)
   }
 
   // Mostrar modal
