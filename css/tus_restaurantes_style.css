@@ -148,20 +148,62 @@
   flex-direction: column;
 }
 
-.restaurant-form {
+#platosContainer{width: 100%;align-items: center;justify-content: center;display: flex;flex-direction: column;}
+
+.restaurant-form, .add-plato-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: 70%;
-  background-color: rgba(255, 255, 255, 0.2);
+  width: 80%;
+  background-color: rgb(163, 163, 134);
   padding: 1.5rem;
   border-radius: 1rem;
+  align-self: center;
+  justify-content: center;
 }
 
-.form-section label {
+.form-section, .add-plato-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-section label, .form-section p {
   font-weight: 500;
-  display: block;
   margin-bottom: 0.4rem;
+  width: 100%;
+  display: flex;
+  justify-content:start;
+}
+
+.form-section input, .form-section textarea{width:  95%;}
+.form-section select {
+  width: 95%;
+  background-color: rgb(216, 216, 216);
+  border: none;
+  border-radius: 0.6rem;
+  padding: 0.8rem;
+  font-size: 1rem;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+
+.form-section select:hover {
+  background-color: rgb(230, 230, 230);
+}
+
+.form-section select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #00000055;
+  background-color: rgb(240, 240, 240);
+}
+
+.form-section option {
+  background-color: #fff;
+  color: #000000;
 }
 
 .preview-img {
@@ -180,13 +222,15 @@ textarea {
   width: 100%;
   border: none;
   border-radius: 0.6rem;
-  background: rgba(0, 0, 0, 0.05);
+  background: rgb(216, 216, 216);
   padding: 0.8rem;
   font-size: 1rem;
   color: #333;
 }
 
-#saveBtn {
+.crear-plato{margin-bottom: 3%;align-self: center !important;}
+
+#saveBtn, .crear-plato, .add-plato-form button {
   align-self: flex-end;
   background-color: var(--color-accent);
   color: white;
@@ -198,7 +242,9 @@ textarea {
   transition: background-color 0.3s ease;
 }
 
-#saveBtn:hover {
+.add-plato-form button{ align-self:  center;}
+
+#saveBtn:hover, .crear-plato:hover, .add-plato-form button:hover {
   background-color: #c63b27;
 }
 
@@ -297,3 +343,6 @@ textarea {
     gap: 1rem;
   }
 }
+
+.back-btn{position: absolute;left: 1%;top:5%;}
+.back-btn img{width: 50px;}
