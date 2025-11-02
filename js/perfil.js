@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const perfilBtn = document.querySelectorAll('.menu-btn')[0];
   const reseñasBtn = document.querySelectorAll('.menu-btn')[1];
   const restaurantesBtn = document.querySelectorAll('.menu-btn')[2];
+  const cerrarSesionBtn = document.querySelector('.cerrar-sesion');
 
   const perfilSection = document.getElementById('perfil-section');
   const reseñasSection = document.getElementById('reseñas-section');
@@ -107,7 +108,13 @@ document.addEventListener('DOMContentLoaded', () => {
       reseñas.forEach(r => {
         const div = document.createElement('div');
         div.classList.add('reseña-card');
+
+        const nombreRestaurante = r.restaurante_info && r.restaurante_info.length > 0
+          ? r.restaurante_info[0].nombre
+          : "Desconocido";
+
         div.innerHTML = `
+          <h4>Restaurante: ${nombreRestaurante}</h4>
           <h4>Calificación: ${r.calificacion}</h4>
           <p>${r.comentario}</p>
           <button class="edit-btn">Editar</button>
@@ -141,6 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const crearBtn = document.createElement('button');
       crearBtn.textContent = 'Crear nueva reseña';
+      crearBtn.classList.add("reseña-crear");
       crearBtn.addEventListener('click', crearReseñaForm);
       container.appendChild(crearBtn);
 
@@ -195,6 +203,32 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error(err);
     }
   }
+
+  // ---------------- CERRAR SESIÓN ----------------
+  cerrarSesionBtn.addEventListener('click', async () => {
+    try {
+      await fetch(`${baseURL}/usuarios/logout`, {
+        method: 'POST',
+        credentials: 'include',
+      });
+
+      // Eliminar cookies manualmente
+      document.cookie.split(";").forEach(c => {
+        document.cookie = c
+          .replace(/^ +/, "")
+          .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+      });
+
+      // Limpiar almacenamiento local y de sesión
+      localStorage.clear();
+      sessionStorage.clear();
+
+      // Redirigir al inicio
+      window.location.href = "../index.html";
+    } catch (error) {
+      console.error('Error cerrando sesión:', error);
+    }
+  });
 
   // --- CARGA INICIAL ---
   mostrarSeccion(perfilSection);
