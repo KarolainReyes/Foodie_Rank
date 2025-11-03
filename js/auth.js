@@ -23,13 +23,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       newButton.classList.add("boton-dinamico")
       // Redirigir correctamente desde cualquier página
       newButton.addEventListener("click", () => {
-        window.location.href = currentPage === "index.html" ? "./html/admin.html" : "../html/admin.html";
+        window.location.href = currentPage === "index.html" ? "./html/admin.html" : "Foodie_Rank/html/admin.html";
       });
     } else {
       newButton.textContent = "Mi perfil";
       newButton.classList.add("boton-dinamico")
       newButton.addEventListener("click", () => {
-        window.location.href = currentPage === "index.html" ? "./html/perfil_user.html" : "../html/perfil_user.html";
+        window.location.href = currentPage === "index.html" ? "./html/perfil_user.html" : "Foodie_Rank/html/perfil_user.html";
       });
     }
 
