@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- VERIFICAR TOKEN EN COOKIE AL CARGAR ---
   async function verificarSesion() {
     try {
-      const response = await fetch("http://localhost:4000/usuarios/logged/verificar", {
+      const response = await fetch("https://foodie-rank-backend.onrender.com/usuarios/logged/verificar", {
         method: "GET",
         credentials: "include", // Enviar cookies automáticamente
       });
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const response = await fetch("http://localhost:4000/usuarios/login", {
+      const response = await fetch("https://foodie-rank-backend.onrender.com/usuarios/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include", // 🔥 importante para que se guarde la cookie

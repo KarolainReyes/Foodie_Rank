@@ -1,6 +1,6 @@
 async function obtenerUsuarioId() {
   try {
-    const response = await fetch("http://localhost:4000/usuarios/logged/id", {
+    const response = await fetch("https://foodie-rank-backend.onrender.com/usuarios/logged/id", {
       method: "GET",
       credentials: "include"
     });

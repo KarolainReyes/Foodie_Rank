@@ -71,7 +71,7 @@ Renderiza todos los restaurantes
 ## 🌐 Consumo del backend
 
 El frontend consume los endpoints del backend **Foodie Rank API**
-alojado en `http://localhost:4000`, incluyendo:
+alojado en `https://foodie-rank-backend.onrender.com`, incluyendo:
 
 -   `/restaurantes` → Listar, crear, actualizar y eliminar restaurantes.
 -   `/usuarios` → Registro, login y gestión de usuarios.
@@ -114,7 +114,7 @@ alojado en `http://localhost:4000`, incluyendo:
 2.  Abre el archivo `index.html` directamente en tu navegador o usa un
     servidor local (por ejemplo con VSCode Live Server).
 
-3.  Asegúrate de tener el backend corriendo en `http://localhost:4000`.
+3.  Asegúrate de tener el backend corriendo en `https://foodie-rank-backend.onrender.com`.
 
 ------------------------------------------------------------------------
 

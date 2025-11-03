@@ -6,11 +6,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Endpoints de ejemplo
   const apiUrls = {
-    "Mi perfil": "http://localhost:4000/usuarios/logged/verificar",
-    "Usuarios": "http://localhost:4000/usuarios",
-    "Restaurantes": "http://localhost:4000/restaurantes",
-    "Solicitudes": "http://localhost:4000/solicitudes",
-    "Categorias": "http://localhost:4000/categorias"
+    "Mi perfil": "https://foodie-rank-backend.onrender.com/usuarios/logged/verificar",
+    "Usuarios": "https://foodie-rank-backend.onrender.com/usuarios",
+    "Restaurantes": "https://foodie-rank-backend.onrender.com/restaurantes",
+    "Solicitudes": "https://foodie-rank-backend.onrender.com/solicitudes",
+    "Categorias": "https://foodie-rank-backend.onrender.com/categorias"
   };
 
   function limpiarContenido() {
@@ -226,7 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
       cerrarSesionBtn.addEventListener("click", async () => {
         try {
           // Llama al backend para eliminar cookies httpOnly
-          await fetch("http://localhost:4000/usuarios/logout", {
+          await fetch("https://foodie-rank-backend.onrender.com/usuarios/logout", {
             method: "POST",
             credentials: "include",
           });

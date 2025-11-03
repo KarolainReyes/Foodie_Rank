@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const currentPage = window.location.pathname.split("/").pop(); 
 
   try {
-    const response = await fetch("http://localhost:4000/usuarios/logged/verificar", {
+    const response = await fetch("https://foodie-rank-backend.onrender.com/usuarios/logged/verificar", {
       method: "GET",
       credentials: "include"
     });

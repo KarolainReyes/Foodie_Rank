@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const baseURL = 'http://localhost:4000';
+  const baseURL = 'https://foodie-rank-backend.onrender.com';
 
   const urls = {
     restaurantesUsuario: `${baseURL}/restaurantes/usuario/`,

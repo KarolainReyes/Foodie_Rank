@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 // ==========================
 async function obtenerPlatos() {
   try {
-    const resp = await fetch("http://localhost:4000/platos");
+    const resp = await fetch("https://foodie-rank-backend.onrender.com/platos");
     if (!resp.ok) throw new Error("Error al obtener platos");
     listaPlatos = await resp.json();
   } catch (error) {
@@ -36,7 +36,7 @@ async function obtenerPlatos() {
 
 async function obtenerRestaurantes() {
   try {
-    const resp = await fetch("http://localhost:4000/restaurantes");
+    const resp = await fetch("https://foodie-rank-backend.onrender.com/restaurantes");
     if (!resp.ok) throw new Error("Error al obtener restaurantes");
     listaRestaurantes = await resp.json();
   } catch (error) {

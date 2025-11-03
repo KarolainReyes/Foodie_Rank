@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const navbar = document.querySelector(".navita ul");
   const loginOverlay = document.getElementById("modal-overlay");
   const loginForm = document.getElementById("login-form");
-
+ const registerForm = document.getElementById("register-form")
   if (!navbar || !loginOverlay || !loginForm) return;
 
   // Crear botón de login si no existe
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!emailUser || !contraseniaUser) return alert("Por favor ingresa tu correo y contraseña.");
 
     try {
-      const response = await fetch("http://localhost:4000/usuarios/login", {
+      const response = await fetch("https://foodie-rank-backend.onrender.com/usuarios/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (contraseniaUser.length < 6) return alert("La contraseña debe tener al menos 6 caracteres.");
 
     try {
-      const response = await fetch("http://localhost:4000/usuarios/register", {
+      const response = await fetch("https://foodie-rank-backend.onrender.com/usuarios/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function obtenerRestaurantes() {
   try {
-    const res = await fetch("http://localhost:4000/restaurantes");
+    const res = await fetch("https://foodie-rank-backend.onrender.com/restaurantes");
     listaRestaurantes = await res.json();
   } catch (err) {
     console.error("Error al obtener restaurantes:", err);
@@ -38,7 +38,7 @@ async function obtenerRestaurantes() {
 
 async function obtenerReseñas() {
   try {
-    const res = await fetch("http://localhost:4000/resenias");
+    const res = await fetch("https://foodie-rank-backend.onrender.com/resenias");
     listaReseñas = await res.json();
   } catch (err) {
     console.error("Error al obtener reseñas:", err);
@@ -47,7 +47,7 @@ async function obtenerReseñas() {
 
 async function llenarCategorias() {
   try {
-    const res = await fetch("http://localhost:4000/categorias");
+    const res = await fetch("https://foodie-rank-backend.onrender.com/categorias");
     const categorias = await res.json();
     categoryFilter.innerHTML = `<option value="all">Todas las categorías</option>`;
     categorias.forEach(c => {
