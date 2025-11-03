@@ -1,33 +1,36 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  // 🔹 PRIMER PASO: Verificar si el usuario es admin
   try {
     const res = await fetch("https://foodie-rank-backend.onrender.com/api/verificar-admin", {
       method: "GET",
-      credentials: "include" // envía cookies httpOnly
+      credentials: "include" // ⚠️ envía cookies httpOnly
     });
 
     if (!res.ok) {
       alert("No tienes permisos para acceder a esta página.");
-      window.location.href = "../index.html"; // redirige al login
+      window.location.href = "../index.html"; // redirige si no es admin
       return;
     }
 
-    // Opcional: puedes recibir info del admin si quieres mostrar nombre o rol
     const data = await res.json();
     console.log("Acceso concedido:", data.mensaje);
 
+    // ✅ Inicializamos el dashboard
+    iniciarAdminDashboard();
+
   } catch (error) {
     console.error("Error verificando admin:", error);
-    window.location.href = "../index.html"; // redirige al login
+    window.location.href = "../index.html"; // redirige al login en caso de error
   }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
+// 🔹 SEGUNDO PASO: Función que carga el dashboard
+function iniciarAdminDashboard() {
   const sidebarBtns = document.querySelectorAll(".sidebar .menu-btn");
   const perfilContent = document.querySelector(".perfil-content");
-
   let currentSection = null;
 
-  // Endpoints de ejemplo
+  // Endpoints
   const apiUrls = {
     "Mi perfil": "https://foodie-rank-backend.onrender.com/usuarios/logged/verificar",
     "Usuarios": "https://foodie-rank-backend.onrender.com/usuarios",
@@ -99,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <p><strong>Ubicación:</strong> ${item.ubicacion}</p>
           <p><strong>Descripcion:</strong> ${item.descripcion}</p>
           <p><strong>Categoria:</strong> ${item.categoria.nombre}</p>
-          <p><strong>Categoria:</strong> ${item.usuario.nombre}</p>
+          <p><strong>Usuario:</strong> ${item.usuario.nombre}</p>
           <img src="${item.imagen}" width="100" />
           <button class="aprobar-btn">Aprobar</button>
           <button class="delete-btn">Eliminar</button>
@@ -248,27 +251,19 @@ document.addEventListener("DOMContentLoaded", () => {
       const cerrarSesionBtn = container.querySelector(".cerrar-sesion");
       cerrarSesionBtn.addEventListener("click", async () => {
         try {
-          // Llama al backend para eliminar cookies httpOnly
           await fetch("https://foodie-rank-backend.onrender.com/usuarios/logout", {
             method: "POST",
             credentials: "include",
           });
 
-          // 🔹 Elimina cookie 'usuario' desde el navegador
           document.cookie = "usuario=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-          // 🔹 Limpia cookies visibles
           document.cookie.split(";").forEach(c => {
             document.cookie = c
               .replace(/^ +/, "")
               .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
           });
-
-          // 🔹 Limpia almacenamiento
           localStorage.clear();
           sessionStorage.clear();
-
-          // 🔹 Redirige
           window.location.href = "../index.html";
         } catch (error) {
           console.error("Error cerrando sesión:", error);
@@ -287,4 +282,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   cargarEntidad("Mi perfil");
-});
+}
