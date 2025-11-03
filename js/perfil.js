@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const urls = {
     updateUser: `${baseURL}/usuarios/`,            
-    userReseñas: `${baseURL}/resenias/`,           
+    userReseñas: `${baseURL}/resenias/user/`,           
     createReseña: `${baseURL}/resenias`,           
     updateReseña: `${baseURL}/resenias/`,          
     deleteReseña: `${baseURL}/resenias/`,          
@@ -108,9 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
       reseñas.forEach(r => {
         const div = document.createElement('div');
         div.classList.add('reseña-card');
-
-        const nombreRestaurante = r.restaurante_info && r.restaurante_info.length > 0
-          ? r.restaurante_info[0].nombre
+        console.log(reseñas[0])
+        const nombreRestaurante = r.restaurante_info.nombre 
+          ? r.restaurante_info.nombre
           : "Desconocido";
 
         div.innerHTML = `

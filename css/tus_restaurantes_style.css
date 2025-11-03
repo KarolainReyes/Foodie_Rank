@@ -148,7 +148,7 @@
   flex-direction: column;
 }
 
-#platosContainer{width: 100%;align-items: center;justify-content: center;display: flex;flex-direction: column;}
+#platosContainer{width: 100%;align-items: center;justify-content: center;display: flex;flex-direction: column;gap:1vh}
 
 .restaurant-form, .add-plato-form {
   display: flex;
@@ -228,9 +228,9 @@ textarea {
   color: #333;
 }
 
-.crear-plato{margin-bottom: 3%;align-self: center !important;}
+.crear-plato,.plato-card button{margin-bottom: 3%;align-self: center !important;}
 
-#saveBtn, .crear-plato, .add-plato-form button {
+#saveBtn, .crear-plato, .add-plato-form button, .plato-card button {
   align-self: flex-end;
   background-color: var(--color-accent);
   color: white;
@@ -241,6 +241,8 @@ textarea {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
+.plato-card{display: flex;flex-direction: column;width: 60%;padding:3%;box-shadow: 1px 3px 3px black;border-radius: 10px;}
 
 .add-plato-form button{ align-self:  center;}
 
