@@ -1,3 +1,26 @@
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const res = await fetch("https://foodie-rank-backend.onrender.com/api/verificar-admin", {
+      method: "GET",
+      credentials: "include" // envía cookies httpOnly
+    });
+
+    if (!res.ok) {
+      alert("No tienes permisos para acceder a esta página.");
+      window.location.href = "../index.html"; // redirige al login
+      return;
+    }
+
+    // Opcional: puedes recibir info del admin si quieres mostrar nombre o rol
+    const data = await res.json();
+    console.log("Acceso concedido:", data.mensaje);
+
+  } catch (error) {
+    console.error("Error verificando admin:", error);
+    window.location.href = "../index.html"; // redirige al login
+  }
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   const sidebarBtns = document.querySelectorAll(".sidebar .menu-btn");
   const perfilContent = document.querySelector(".perfil-content");
