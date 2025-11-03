@@ -529,3 +529,14 @@
 .btn-vermas:hover, .boton-dinamico {
   transform: scale(1.05);
 }
+
+@media (min-width: 100px) and (max-width: 770px) {
+
+.filter-bar{display: flex;flex-direction: column;margin-bottom: 3vh;border-bottom: 1px solid black;padding: 3vh;width: 80%;}
+.navita{width: 100%;
+flex-direction: column;gap: 3vh;}
+.restaurants-container{width: 90%;}
+.card{width: 80%;}
+.plate-card{width: 80%;}
+
+}

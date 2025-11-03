@@ -348,3 +348,14 @@ textarea {
 
 .back-btn{position: absolute;left: 1%;top:5%;}
 .back-btn img{width: 50px;}
+
+@media (min-width: 100px) and (max-width: 770px) {
+  body{padding: 3%;}
+.perfil-content{margin-top: 1vh;width: 100%;align-self: center;padding:3vw;}
+.sidebar{width: 100%; align-self: center;} 
+.perfil-container{flex-direction: column !important;display: flex;}
+.back-btn{left: 15px;}
+.plato-card input, .plato-card textarea{width: 90%}
+.plato-card img {width: 100%;}
+.plato-card{ width: 90%;}
+}
