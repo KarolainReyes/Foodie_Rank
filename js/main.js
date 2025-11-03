@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
       newButton.id = "admin-btn";
       newButton.textContent = "Gestión";
       newButton.addEventListener("click", () => {
-        window.location.href = "Foodie_Rank/html/admin.html";
+        window.location.href = "./html/admin.html";
       });
     } else {
       // Usuario normal
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
       newButton.id = "user-btn";
       newButton.textContent = "Mi perfil";
       newButton.addEventListener("click", () => {
-        window.location.href = "Foodie_Rank/html/perfil_user.html";
+        window.location.href = "./html/perfil_user.html";
       });
     }
 
