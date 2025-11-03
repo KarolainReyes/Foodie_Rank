@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!loginBtn) {
     loginBtn = document.createElement("button");
     loginBtn.id = "login-btn";
-    loginBtn.textContent = "Log In";
+    loginBtn.textContent = "Ingresar";
     navbar.insertAdjacentElement("afterend",loginBtn)
   }
 
@@ -60,6 +60,44 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
+      alert("Hubo un problema al conectar con el servidor.");
+    }
+  });
+
+    // ==========================
+  // Registro
+  // ==========================
+  registerForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const nombreUser = registerForm.querySelector('input[name="nombre"]').value.trim();
+    const emailUser = registerForm.querySelector('input[type="email"]').value.trim();
+    const contraseniaUser = registerForm.querySelector('input[type="password"]').value.trim();
+
+    // Validaciones frontend
+    if (!nombreUser || !emailUser || !contraseniaUser) return alert("Por favor completa todos los campos.");
+    if (nombreUser.length < 3) return alert("El nombre debe tener al menos 3 caracteres.");
+    if (contraseniaUser.length < 6) return alert("La contraseña debe tener al menos 6 caracteres.");
+
+    try {
+      const response = await fetch("http://localhost:4000/usuarios/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ nombre: nombreUser, correo: emailUser, contraseña: contraseniaUser }),
+      });
+
+      const data = await response.json();
+
+      if (data.exito) {
+        alert(`¡Usuario ${data.usuario.nombre} registrado correctamente!`);
+        registerOverlay.style.display = "none";
+        location.reload();
+      } else {
+        alert(data.error || "No se pudo registrar el usuario");
+      }
+
+    } catch (error) {
+      console.error("Error al registrar usuario:", error);
       alert("Hubo un problema al conectar con el servidor.");
     }
   });
