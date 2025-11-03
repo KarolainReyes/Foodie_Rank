@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   // 🔹 PRIMER PASO: Verificar si el usuario es admin
   try {
-    const res = await fetch("https://foodie-rank-backend.onrender.com/api/verificar-admin", {
+    const res = await fetch("https://foodie-rank-backend.onrender.com/usuarios/api/verificar-admin", {
       method: "GET",
       credentials: "include" // ⚠️ envía cookies httpOnly
     });
