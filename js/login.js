@@ -1,38 +1,70 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // --------------------------
+  // Elementos del DOM
+  // --------------------------
   const navbar = document.querySelector(".navita ul");
   const loginOverlay = document.getElementById("modal-overlay");
   const loginForm = document.getElementById("login-form");
- const registerForm = document.getElementById("register-form")
-  if (!navbar || !loginOverlay || !loginForm) return;
+  const registerOverlay = document.getElementById("register-overlay");
+  const registerForm = document.getElementById("register-form");
 
+  if (!navbar || !loginOverlay || !loginForm || !registerForm || !registerOverlay) return;
+
+  // --------------------------
   // Crear botón de login si no existe
+  // --------------------------
   let loginBtn = document.getElementById("login-btn");
   if (!loginBtn) {
     loginBtn = document.createElement("button");
     loginBtn.id = "login-btn";
     loginBtn.textContent = "Ingresar";
-    navbar.insertAdjacentElement("afterend",loginBtn)
+    navbar.insertAdjacentElement("afterend", loginBtn);
   }
 
-  // Mostrar modal
+  // --------------------------
+  // Mostrar modal de login
+  // --------------------------
   loginBtn.addEventListener("click", () => {
     loginOverlay.style.display = "flex";
   });
 
-  // Cerrar modal
+  // --------------------------
+  // Cerrar modal de login al hacer click afuera
+  // --------------------------
   loginOverlay.addEventListener("click", (e) => {
     if (e.target === loginOverlay) loginOverlay.style.display = "none";
   });
 
+  // --------------------------
+  // Mostrar modal de registro desde el enlace en login
+  // --------------------------
+  const linkRegistro = loginForm.querySelector('p a');
+  linkRegistro.addEventListener("click", (e) => {
+    e.preventDefault();
+    loginOverlay.style.display = "none";
+    registerOverlay.style.display = "flex";
+  });
+
+  // --------------------------
+  // Cerrar modal de registro al hacer click afuera
+  // --------------------------
+  registerOverlay.addEventListener("click", (e) => {
+    if (e.target === registerOverlay) registerOverlay.style.display = "none";
+  });
+
+  // --------------------------
   // Guardar usuario en localStorage
+  // --------------------------
   function guardarUsuarioLocalStorage(usuario) {
-    const usuarioLocale = { id: usuario._id, nombre: usuario.nombre,correo:usuario.correo};
+    const usuarioLocale = { id: usuario._id, nombre: usuario.nombre, correo: usuario.correo };
     localStorage.setItem("usuarioInfo", JSON.stringify(usuarioLocale));
     console.log("ID del usuario:", usuarioLocale.id);
     console.log("Nombre del usuario:", usuarioLocale.nombre);
   }
 
-  // Envío del formulario
+  // --------------------------
+  // Envío del formulario de login
+  // --------------------------
   loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -54,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
         guardarUsuarioLocalStorage(data.usuario);
         alert(`¡Bienvenido/a ${data.usuario.nombre}!`);
         loginOverlay.style.display = "none";
-          location.reload();
+        location.reload();
       } else {
         alert(data.mensaje || "Correo o contraseña incorrectos");
       }
@@ -64,11 +96,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-    // ==========================
-  // Registro
-  // ==========================
+  // --------------------------
+  // Envío del formulario de registro
+  // --------------------------
   registerForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+
     const nombreUser = registerForm.querySelector('input[name="nombre"]').value.trim();
     const emailUser = registerForm.querySelector('input[type="email"]').value.trim();
     const contraseniaUser = registerForm.querySelector('input[type="password"]').value.trim();
@@ -95,7 +128,6 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         alert(data.error || "No se pudo registrar el usuario");
       }
-
     } catch (error) {
       console.error("Error al registrar usuario:", error);
       alert("Hubo un problema al conectar con el servidor.");
