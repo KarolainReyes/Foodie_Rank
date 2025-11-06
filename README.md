@@ -58,13 +58,23 @@ Formulario de autenticación e
     ![Pantalla inicio](./REAMDE_IMG/login.png)
 
 3.  **Listado de Restaurantes** 
+
 Renderiza todos los restaurantes
     disponibles desde el backend. Incluye filtros y buscador dinámico.
-    ![Pantalla inicio](./REAMDE_IMG/inicio.png)
-4.  **Detalle de Restaurante** -- Muestra información ampliada del
+    ![Pantalla inicio](./REAMDE_IMG/restaurantes.png)
+
+4.  **Detalle de Restaurante** 
+
+Muestra información ampliada del
     restaurante, sus reseñas y permite agregar nuevas reseñas.
-5.  **Panel de Administración** -- Vista dedicada para usuarios
+    ![Pantalla inicio](./REAMDE_IMG/detalle_restaurantes.png)
+
+5.  **Panel de Administración** 
+
+Vista dedicada para usuarios
     administradores con funciones CRUD completas.
+![Pantalla inicio](./REAMDE_IMG/admin.png)
+
 
 ------------------------------------------------------------------------
 
@@ -130,6 +140,16 @@ alojado en `https://foodie-rank-backend.onrender.com`, incluyendo:
 El Backend del proyecto se encuentra en un repositorio independiente.
 
 🔗 [Repositorio del Backend - Foodie Rank](https://github.com/Andre07g/Foodie_Rank_Backend.git)
+
+---
+
+## 🎥 Video explicativo del proyecto
+
+[Video del proyecto](https://youtu.be/SSGlCFuaidk?si=qG8ueckJO9_lZR-z)
+
+## 📃 Documentación Foodie Rank
+
+[Documento PDF](https://drive.google.com/file/d/1N8mJuRhqd3A4MTvQjwgNL9wfVvGzhxoK/view?usp=sharing)
 
 ---
 
